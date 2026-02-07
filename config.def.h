@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* Constants */
-#define TERMINAL "alacritty"
+#define TERMINAL "kitty"
 
 /* Appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -12,8 +12,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* Fonts */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12", "NotoColorEmoji:size=12" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=12";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=20", "NotoColorEmoji:size=20" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=20";
 
 /* Nord Color Scheme */
 static const char col_gray1[]       = "#2E3440"; // Background
