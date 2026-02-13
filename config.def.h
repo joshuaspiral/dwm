@@ -12,8 +12,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* Fonts */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=20", "NotoColorEmoji:size=20" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=20";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=16", "NotoColorEmoji:size=16" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
 
 /* Nord Color Scheme */
 static const char col_gray1[]       = "#2E3440"; // Background
@@ -69,6 +69,7 @@ static const Layout layouts[] = {
 /* Commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *slockcmd[] = { "slock", NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *screenshotcmd[] = { "sh", "-c", "maim -s | xclip -selection clipboard -t image/png", NULL };
 
@@ -126,13 +127,14 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
     /* Hardware Keys */
-    /* Volume */
-{ 0, XF86XK_AudioMute,        spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
-    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
-    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
-    /* Brightness */
+    { 0, XF86XK_AudioMute,        spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+10 dwmblocks") },
+    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+10 dwmblocks") },
+    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+10 dwmblocks") },
+    /* Brightness */ 
     { 0, XF86XK_MonBrightnessDown,  spawn, SHCMD("brightnessctl set 5%-") },
     { 0, XF86XK_MonBrightnessUp,    spawn, SHCMD("brightnessctl set +5%") },
+
+    { MODKEY|ShiftMask,                       XK_l,      spawn,          {.v = slockcmd } },
 };
 
 /* Button Definitions */
